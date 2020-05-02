@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  mongo:
+    image: mongo    
+    container_name: mongo    
+    volumes:      
+      - mongodata:/data/db
+    restart: always
+    ports:
+      - 27017:27017
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+  inventory-api:
+    container_name: inventory-api
+    image: inventoryapi
+    build:
+      context: ./inventory.api
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Container
+    depends_on:
+      - mongo
+volumes:
+  mongodata:

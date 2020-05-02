@@ -1,0 +1,44 @@
+@url = https://localhost:5001/api
+
+### --- Gets one random Product --- ###
+# @name getRandomProduct
+GET {{url}}/product HTTP/1.1
+
+### --- Gets First N Product --- ###
+# @name getFirstNProduct
+GET {{url}}/product/first/3 HTTP/1.1
+
+### --- Gets Last N Product --- ###
+# @name getLastNProduct
+GET {{url}}/product/last/3 HTTP/1.1
+
+
+### --- Gets Product by Id --- ###
+# @name getProductById
+GET {{url}}/product/id/5ead1c0475c82b24202cc1be HTTP/1.1
+
+
+### --- Add a new Product --- ###
+# @addProduct
+POST {{url}}/product HTTP/1.1
+Content-Type:application/json
+
+{
+    "name": "Water Bottle",
+    "description": "refridgeration bottle",
+    "unitPrice": 45.50,
+    "tags": ["bottle"]
+}
+
+### --- Update a Product --- ###
+# @addProduct
+PUT {{url}}/product/5ead1c0475c82b24202cc1be HTTP/1.1
+Content-Type:application/json
+
+{
+    "name": "Water Bottle",
+    "code":"BTTL1",
+    "description": "refridgeration bottle",
+    "unitPrice": 45.50,
+    "tags": ["bottle"]
+}

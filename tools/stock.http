@@ -1,0 +1,52 @@
+@url = https://localhost:5001/api
+
+### --- Gets one random Stock --- ###
+# @name getRandomStock
+GET {{url}}/stock HTTP/1.1
+
+### --- Gets First N Stock --- ###
+# @name getFirstNStock
+GET {{url}}/stock/first/3 HTTP/1.1
+
+### --- Gets Last N Stock --- ###
+# @name getLastNStock
+GET {{url}}/stock/last/3 HTTP/1.1
+
+
+### --- Gets Stock by Id --- ###
+# @name getStockById
+GET {{url}}/stock/id/5eb00fbad3621008c83d5dcb HTTP/1.1
+
+
+### --- Add a new Stock --- ###
+# @addStock
+POST {{url}}/stock HTTP/1.1
+Content-Type:application/json
+
+{
+    "StockId":"5ead1c0475c82b24202cc1be",
+    "totalQuantity":100,
+    "soldQuantity":2,
+    "damagedQuantity":1,
+    "tags": ["bottle"]
+}
+
+### --- Update a Stock --- ###
+# @addStock
+PUT {{url}}/stock/5ead1c0475c82b24202cc1be HTTP/1.1
+Content-Type:application/json
+
+{
+    "name": "Water Bottle",
+    "code":"BTTL1",
+    "description": "refridgeration bottle",
+    "unitPrice": 45.50,
+    "tags": ["bottle"]
+}
+
+
+### --- Update a Stock --- ###
+# @deleteStock
+DELETE {{url}}/stock/5eb00dcbbbd250a378848c2c HTTP/1.1
+Content-Type:application/json
+

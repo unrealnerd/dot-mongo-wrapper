@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using inventory.api.Options;
 using inventory.api.Repository;
 using Microsoft.Extensions.Hosting;
+using inventory.api.Models;
+using Microsoft.Extensions.Options;
 
 namespace inventory.api
 {
@@ -21,10 +23,11 @@ namespace inventory.api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped(typeof(IDataContext<>), typeof(DataContext<>));
-            services.AddScoped(typeof(IRepository<>), typeof(MongoRepository<>));           
+            services.AddSingleton(typeof(IDataContext<>), typeof(DataContext<>));
+            
+            services.AddSingleton(typeof(IRepository<>), typeof(MongoRepository<>));
 
-            services.Configure<InventoryOptions>(Configuration.GetSection("Phrases"));
+            services.Configure<InventoryOptions>(Configuration.GetSection("Inventory"));
             services.AddControllers();
 
         }

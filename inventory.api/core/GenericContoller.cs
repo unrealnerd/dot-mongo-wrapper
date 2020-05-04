@@ -59,8 +59,9 @@ namespace inventory.api
 
         // DELETE api/domainentity/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async void Delete(string id)
         {
+            await Repository.Remove(id);
         }
     }
 

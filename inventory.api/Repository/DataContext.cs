@@ -15,9 +15,11 @@ namespace inventory.api.Repository
             var client = new MongoClient(options.Value.ConnectionString);
             if (client != null)
                 Database = client.GetDatabase(options.Value.Database);
+
+            Collection = Database.GetCollection<T>(options.Value.Collections[typeof(T).ToString()]);
         }
 
-        public IMongoCollection<T> Collection => Database.GetCollection<T>(Options.Value.Collection);
+        public IMongoCollection<T> Collection { get; }
 
     }
 }

@@ -30,3 +30,6 @@ services:
       - mongo
 volumes:
   mongodata:
+networks: 
+  inventory:
+    driver: overlay

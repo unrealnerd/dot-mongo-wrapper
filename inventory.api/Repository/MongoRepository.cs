@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 using inventory.api.Repository;
 using MongoDB.Bson;
+using Microsoft.Extensions.Logging;
 
 namespace inventory.api.Repository
 {
@@ -17,6 +18,7 @@ namespace inventory.api.Repository
     public class MongoRepository<T> : IRepository<T> where T : class, IIdentifable
     {
         private readonly IDataContext<T> _context = null;
+        private readonly ILogger<T> _logger;
 
         public MongoRepository(IDataContext<T> context)
         {
@@ -39,9 +41,9 @@ namespace inventory.api.Repository
             {
                 await _context.Collection.InsertOneAsync(input);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                throw;
+                _logger.LogCritical(ex, "Error occured when saving into db. {ex.message}", ex.Message);
             }
             return input;
         }

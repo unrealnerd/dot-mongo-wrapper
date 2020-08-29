@@ -23,6 +23,9 @@ namespace inventory.api.Models
         [BsonElement("unit_price")]
         public float UnitPrice { get; set; }
 
+        [BsonElement("images")]
+        public string[] Images { get; set; }
+
         [BsonElement("tags")]
         public string[] Tags { get; set; }
     }

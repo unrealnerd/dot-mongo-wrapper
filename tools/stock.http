@@ -1,4 +1,4 @@
-@url = https://localhost:5001/api
+@url = http://localhost:6000/api
 
 ### --- Gets one random Stock --- ###
 # @name getRandomStock

@@ -16,8 +16,10 @@
             "launchBrowser": {
                 "enabled": false
             },
+            "console": "internalConsole",
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:6000"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

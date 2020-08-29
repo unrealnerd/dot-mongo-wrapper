@@ -8,6 +8,8 @@ using inventory.api.Repository;
 using Microsoft.Extensions.Hosting;
 using inventory.api.Models;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace inventory.api
 {
@@ -24,7 +26,7 @@ namespace inventory.api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(typeof(IDataContext<>), typeof(DataContext<>));
-            
+
             services.AddSingleton(typeof(IRepository<>), typeof(MongoRepository<>));
 
             services.Configure<InventoryOptions>(Configuration.GetSection("Inventory"));
@@ -45,8 +47,17 @@ namespace inventory.api
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseRouting();
+
+            var resourceFolderPath = Path.Combine(env.ContentRootPath, "Resources");
+            Directory.CreateDirectory(resourceFolderPath);
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(resourceFolderPath),
+                RequestPath = "/Resources"
+            });
 
             app.UseEndpoints(endpoints =>
             {

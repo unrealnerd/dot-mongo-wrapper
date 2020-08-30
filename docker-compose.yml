@@ -23,7 +23,7 @@ services:
       context: ./inventory.api
       dockerfile: Dockerfile
     ports:
-      - 8080:80
+      - 9200:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Container
     depends_on:
@@ -32,4 +32,4 @@ volumes:
   mongodata:
 networks: 
   inventory:
-    driver: overlay
+    driver: bridge

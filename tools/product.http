@@ -1,5 +1,5 @@
 # @url = http://localhost:5000/api
-@url = http://localhost:8080/api
+@url = http://localhost:9200/api
 
 ### --- Gets one random Product --- ###
 # @name getRandomProduct

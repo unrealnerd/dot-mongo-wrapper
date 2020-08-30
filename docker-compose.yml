@@ -8,6 +8,8 @@ services:
     restart: always
     ports:
       - 27017:27017
+    networks: 
+      - inventory
   mongo-express:
     image: mongo-express
     container_name: mongo-express
@@ -16,6 +18,8 @@ services:
       - 8082:8081
     depends_on:
       - mongo
+    networks: 
+      - inventory
   inventory-api:
     container_name: inventory-api
     image: inventoryapi
@@ -28,8 +32,11 @@ services:
       - ASPNETCORE_ENVIRONMENT=Container
     depends_on:
       - mongo
+    networks: 
+      - inventory
 volumes:
   mongodata:
 networks: 
   inventory:
+    name: inventory
     driver: bridge
